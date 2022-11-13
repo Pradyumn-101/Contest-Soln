@@ -1,0 +1,43 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		for(int j=0;j<t;j++){
+		    int n=sc.nextInt();
+		    String s=sc.next();
+		    HashMap<Character,Integer>hm=new HashMap<>();
+		    for(int i=0;i<s.length();i++){
+		        char ch=s.charAt(i);
+		        if(hm.containsKey(ch)){
+		            int r=hm.get(ch);
+		            int m=r+1;
+		            hm.put(ch,m);
+		        }
+		        else{
+		            hm.put(ch,1);
+		        }
+		    }
+		    boolean flag=true;
+		    for(Character key:hm.keySet()){
+		        Integer val=hm.get(key);
+		        if(val%2!=0){
+		            flag=false;
+		            break;
+		        }
+		    }
+		    if(flag){
+		        System.out.println("YES");
+		    }
+		    else{
+		        System.out.println("No");
+		    }
+		}
+	}
+}
