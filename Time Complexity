@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	int num;
+	scanf("%d",&num);
+	while(num--){
+	    int num1,num2;
+	    scanf("%d %d",&num1,&num2);
+	    if(num1>num2)
+	    printf("YES\n");
+	    else
+	    printf("NO\n");
+	}
+	return 0;
+}
