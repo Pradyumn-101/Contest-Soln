@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+    int t;
+    cin>>t;
+    while(t-->0){
+        ll A,B,C;ll solv=0;
+        cin>>A>>B>>C;
+        if(B+C<=A){
+            ll temp =A-(B+C);
+            solv+=B*(temp+C);
+            solv+=(temp*C);
+            solv+=(temp*(temp-1))/2;
+        }
+        else{
+            ll temp=(B+C)-A;
+            B=B-temp;
+            C=C-temp;
+            temp=0;
+            solv+=B*(temp+C);
+            solv+=(temp*C);
+            solv+=(temp*(temp+1))/2;
+            
+        }
+        cout<<solv<<endl;
+    }
+    
+    return 0;
+}
