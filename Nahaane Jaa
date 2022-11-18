@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Candies
+{public static void main (String[] args) throws java.lang.Exception{
+		Scanner sc= new Scanner(System.in);
+		int p=sc.nextInt();
+		for(int i=0;i<p;i++){
+		    int n=sc.nextInt();
+		    int k=sc.nextInt();
+		    int[] arr=new int[n];
+		    for(int j=0;j<n;j++)
+		        arr[j]=sc.nextInt();
+		    if(n==1){
+		        if(arr[0]==k)
+		            System.out.println("Yes");
+		        else    
+		            System.out.println("No");
+		        continue;
+		    }
+		    int temp=1;
+		    for(int j=0;j<n-1;j++)
+		        if(arr[j]==k){
+		            temp=0;
+		            break;
+		        }
+		    if(temp==0)
+		        System.out.println("Yes");
+		    else
+		        System.out.println("No");
+		}
+	}}
