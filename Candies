@@ -1,0 +1,42 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Candies
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		while(n-->0){
+		    int a=sc.nextInt();
+		    boolean flag=false;
+		    Map<Integer, Integer> mp = new HashMap<>();		
+
+		    for (int i = 0; i < 2*a; i++)
+            {
+            int aa=sc.nextInt();
+
+            if (mp.containsKey(aa))
+                mp.put(aa, mp.get(aa) + 1);
+            
+            else
+                mp.put(aa, 1);
+            }
+        
+        for (Map.Entry<Integer, Integer> entry : mp.entrySet())
+        {
+            if(entry.getValue()>=3)
+            {System.out.println("no");
+                flag=true;
+                break;
+            }
+            
+        }
+        if(!flag)
+        System.out.println("yes");
+
+		}
+	}
+}
