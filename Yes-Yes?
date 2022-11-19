@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+    int Z;
+    cin>>Z;
+    while(Z--){
+        string S1;
+        cin>>S1;
+        int a;
+        string str="";
+        for(int k=0;k<20;k++)
+            str+="Yes";
+            if((a=str.find(S1,0))==string::npos)
+            cout<<"NO"<<endl;
+            else
+            cout<<"YES"<<endl;
+        
+    }
+    return 0;
+}
