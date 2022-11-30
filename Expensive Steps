@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+int p;
+cin>>p;
+
+while(p--){
+int k,l,m,n,o;
+cin>>k>>l>>m>>n>>o;
+int q = min(l,k-l+1);
+int r = min(m,k-m+1);
+int u = min(n,k-n+1);
+int v = min(o,k-o+1);
+
+cout<<min(abs(n-l)+abs(o-m), min(u,v)+min(q,r))<<endl;
+}
+return 0;
+}
