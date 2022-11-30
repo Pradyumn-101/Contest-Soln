@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int main() {
+int s;
+cin>>s;
+while(s--){
+int q;
+cin>>q;
+int p[q];
+int count=0;
+
+for (int z=0; z<q; z++){
+cin>>p[z];
+if(p[z]%2)
+count++;
+}
+
+if(count==0 || count%2) 
+cout<<"NO"<<endl;
+
+else 
+cout<<"YES"<<endl;
+}
+
+	return 0;
+}
