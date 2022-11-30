@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int p;
+    cin>>p;
+
+while(p--){
+    
+ long long int s,t;
+
+cin>>s>>t;
+
+long long int sum = (s* (s-1))/2;
+
+
+if(t<s/2){
+
+
+long long u = s-2*t;
+
+sum -= (u*(u-1))/2; 
+    
+}
+
+cout<<sum<<endl;
+
+}
+	return 0;
+}
