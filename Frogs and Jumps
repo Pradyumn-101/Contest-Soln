@@ -1,0 +1,31 @@
+class Solution {
+    public int unvisitedLeaves(int N, int leaves, int frogs[]) {
+        // Code here
+        
+        boolean[] leavesArr = new boolean[leaves+1];
+        
+        for(int i = 0; i < frogs.length; i++) {
+            
+            int frogJump = frogs[i];
+            
+            if(frogJump == 1) {
+                return 0;
+            }
+            
+            if(frogJump <= leaves && leavesArr[frogJump] == false) {
+                for(int jump = frogJump; jump <= leaves; jump+=frogJump) {
+                    leavesArr[jump] = true;
+                }
+            }
+        }
+        
+        int notVisited = 0;
+        for(int i = 1; i <= leaves; i++) {
+            if(leavesArr[i] == false) {
+                notVisited++;
+            }
+        }
+        
+        return notVisited;
+    }
+}
