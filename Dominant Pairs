@@ -1,0 +1,22 @@
+class Solution{
+public:
+    int dominantPairs(int n,vector<int> &arr){
+      int siz=n/2;
+        sort(arr.begin(),arr.begin()+siz);
+        sort(arr.begin()+siz,arr.end());
+        
+        int count=0;
+        int i=siz-1;
+        int j=n-1;
+        
+        while(i>=0 && j>=siz){
+            if(arr[i]>=(5*arr[j])){
+                count+=j-siz+1;
+                i--;
+            }else{
+                j--;
+            }
+        }
+        return count;
+    }  
+};
