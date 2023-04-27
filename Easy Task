@@ -1,0 +1,78 @@
+#define vi vector<int>
+#define forn(i,n) for(int i=0;i<n;i++)
+class Solution{
+public:
+    vector<vi>seg;
+    void build(string &s,int l,int r,int i){
+        if(l==r){
+            forn(c,26) seg[i][c]=(s[l]-'a')==c;
+            return;
+        }
+        int m=(l+r)/2;
+        build(s,l,m,2*i+1);
+        build(s,m+1,r,2*i+2);
+        forn(c,26) seg[i][c]=seg[2*i+1][c]+seg[2*i+2][c];
+        
+    }
+    void update(string &s,int l,int r,int i,int pos,char val){
+        if(pos<l || pos>r) return;
+        
+        if(l==r && pos==l){
+            seg[i][s[l]-'a']--;
+            s[l]=val;
+            seg[i][s[l]-'a']++;
+            return;
+        }
+        int m=(l+r)/2;
+        update(s,l,m,2*i+1,pos,val);
+        update(s,m+1,r,2*i+2,pos,val);
+        forn(c,26) seg[i][c]=seg[2*i+1][c]+seg[2*i+2][c];
+    }
+    
+    int query(string &s,int l,int r,int i,int low,int high,int c){
+        if(r<low || l>high) return 0;
+        if(low<=l && r<=high){
+            return seg[i][c];
+        }
+        int m=(l+r)/2;
+        return query(s,l,m,2*i+1,low,high,c)+query(s,m+1,r,2*i+2,low,high,c);
+    }
+    
+    vector<char> easyTask(int n,string s,int q,vector<vector<string>> &queries){
+        // Code here
+        vector<char>res;
+        
+        seg.clear();
+        seg.resize(4*n,vi(26,0));
+        build(s,0,n-1,0);
+        for(auto i:queries){
+            if(i[0]=="1"){
+                char c=i[2][0];
+                update(s,0,n-1,0,stoi(i[1]),c);
+            }
+            else{
+                vi mp(26,0);
+                int l=stoi(i[1]);
+                int r=stoi(i[2]);
+                
+                for(int j=0;j<26;j++){
+                    mp[j]=query(s,0,n-1,0,l,r,j);
+                }
+                int sum=0;
+                int k=stoi(i[3]);
+                char ans;
+                for(int i=25;i>=0;i--){
+                    sum+=mp[i];
+                    if(sum>=k){
+                        ans='a'+i;
+                        break;
+                    }
+                }
+                res.push_back(ans);
+                
+            }
+        }
+        return res;
+                
+    }
+};
