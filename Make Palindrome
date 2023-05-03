@@ -1,0 +1,15 @@
+class Solution{
+public:
+    bool makePalindrome(int n,vector<string> &arr){
+        if(n == 1) return false;
+        unordered_map<string, int> mp;
+        for(auto it: arr){
+            string temp = it;
+            mp[it]++;
+            reverse(temp.begin(), temp.end());
+            mp[temp]++;
+        }
+        if(mp.size() == n)return true;
+        return false;
+    }
+};
