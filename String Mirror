@@ -1,0 +1,14 @@
+class Solution {
+    public static String stringMirror(String str) {
+        int i =0;
+        while(i<str.length()-1 && str.charAt(i)>=str.charAt(i+1) && str.charAt(0)!=str.charAt(1)){
+            i++;
+        }
+        StringBuilder sb = new StringBuilder(str.substring(0,i+1));
+        for(int j =sb.length()-1;j>=0;j--){
+            sb.append(sb.charAt(j));
+        }
+        return sb.toString();
+        // code here
+    }
+}
