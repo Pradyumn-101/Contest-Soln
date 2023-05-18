@@ -1,0 +1,67 @@
+ class Solution {
+
+    public void dfs(int[][] grid, int i, int j) {
+
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != 1) return;
+
+        // It is 1
+
+        grid[i][j] = 2; // Mark it as visited
+
+        dfs(grid, i - 1, j);
+
+        dfs(grid, i, j + 1);
+
+        dfs(grid, i, j - 1);
+
+        dfs(grid, i + 1, j);
+
+    }
+
+    
+
+    public int closedIslands(int[][] matrix, int n, int m) {
+
+        int count = 0;
+
+        //checking the corners and making them 2
+
+        for (int i = 0; i < n; i++) {
+
+            if (matrix[i][0] == 1) dfs(matrix, i, 0);
+
+            if (matrix[i][m - 1] == 1) dfs(matrix, i, m - 1);
+
+        }
+
+        for (int j = 0; j < m; j++) {
+
+            if (matrix[0][j] == 1) dfs(matrix, 0, j);
+
+            if (matrix[n - 1][j] == 1) dfs(matrix, n - 1, j);
+
+        }
+
+        //we are counting the islands that do not touch boundaries 
+
+        for (int i = 1; i < n - 1; i++) {
+
+            for (int j = 1; j < m - 1; j++) {
+
+                if (matrix[i][j] == 1) {
+
+                    count++;
+
+                    dfs(matrix, i, j);
+
+                }
+
+            }
+
+        }
+
+        return count;
+
+    }
+
+}
