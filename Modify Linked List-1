@@ -1,0 +1,48 @@
+class Solution{
+    public:
+    struct Node* modifyTheList(struct Node *head)
+    {
+        vector<int> values;
+        Node* temp = head;
+        while(temp != NULL){
+            values.push_back(temp->data);
+            temp = temp->next;
+        }
+        
+        int siz = values.size();
+        int half = siz/2;
+        
+        //first half
+        int k=siz/2;
+        temp = head;
+        while(k>0){
+            temp->data = values[siz-1-half+k]- values[half-k];
+            k--;
+            temp = temp->next;
+        }
+        
+        //second half
+        if(siz%2 == 0){
+            //even
+            int p = siz - siz/2;
+            while(p>0){
+                temp->data = values[p-1];
+                temp = temp->next;
+                p--;
+            }
+            
+            }
+            else{
+                temp = temp->next;
+                //odd
+                int p = siz - half -1;
+            while(p>0){
+                temp->data = values[p-1];
+                temp = temp->next;
+                p--;
+            }
+        }
+        
+        return head;
+    }
+};
