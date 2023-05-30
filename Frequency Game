@@ -1,0 +1,24 @@
+class Solution{
+public:
+    int LargButMinFreq(int arr[], int n) {
+        // code here
+        //Pehle saare elements ki frequency store karlo map me
+        map<int,int> mp;
+        for(int i = 0; i<n; i++){
+            mp[arr[i]]++;
+        }
+        //Fir ek minimum freq aur maxElement ka variable initialize karlo
+        //Aur fir iterate karo map me 
+        //Kyunki map sorted me store karta hai toh agar humme less than equal frequency ka 
+        //element milega toh hum update kr lenge apna maxElement
+        int miniFreq = 1e8;
+        int maxElement = 0;
+        for(auto x: mp){
+            if(x.second <= miniFreq){
+                miniFreq = x.second;
+                maxElement = x.first;
+            }
+        }
+        return maxElement;
+    }
+};
