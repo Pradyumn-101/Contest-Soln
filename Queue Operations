@@ -1,0 +1,20 @@
+class Geeks{
+    
+    static void insert(Queue<Integer> q, int k){
+        q.add(k);
+    }
+    
+    static int findFrequency(Queue<Integer> q, int k){
+        int n = q.size();
+        int ans = 0;
+        for(int i = 0; i <  n; i++){
+            int num = q.peek();
+            q.remove();
+            if(num==k){
+                ans++;
+            }
+            q.add(num);
+        }
+        return ans;
+    }
+}
