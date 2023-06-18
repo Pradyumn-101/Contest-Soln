@@ -1,0 +1,19 @@
+class Solution{
+public static int distributeTicket(int N,int K)
+    {
+        if(N==0 || N==1 || N==K) return N;
+        int i=1,j=N;
+        while(i!=j){
+            
+            i= i+K;
+            if(i>=j) return j;
+            
+            j=j-K;
+            if(j<=i) return i;
+            
+        }
+        
+        return 0;
+        
+    }
+   }
