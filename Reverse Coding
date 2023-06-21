@@ -1,0 +1,15 @@
+
+class Solution {
+    static int sumOfNaturals(int n) {
+       int ans=0;
+        for(int i=n;i>0;i--)
+        {
+            ans=ans+i;
+            if(ans>1000000007)
+            {
+                ans=ans%1000000007;
+            }
+        }
+        return ans;
+    }
+}
