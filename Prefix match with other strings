@@ -1,0 +1,26 @@
+class Solution
+{
+    public int klengthpref(String[] arr, int n, int k, String str)
+    {
+        int n1 = str.length();
+        if(k > n1) return 0;
+        String pref = "";
+        for(int i=0; i<k; i++){
+            pref = pref + str.charAt(i);
+        }
+        int ansCount = 0;
+        for(String s : arr){
+            if(s.length() < k) continue;
+            if(check(s, pref)){
+                ansCount++;
+            }
+        }
+        return ansCount;
+    }
+    public boolean check(String s, String pref){
+        for(int i=0; i<pref.length(); i++){
+            if(s.charAt(i) != pref.charAt(i)) return false;
+        }
+        return true;
+    }
+}
