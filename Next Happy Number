@@ -1,0 +1,22 @@
+class Solution{
+    
+    static boolean solve(int n){
+        if(n==1||n==7)return true;
+        if(n<=9)return false;
+        
+        int sum=0;
+        while(n!=0){
+            int digit=n%10;
+            sum+=(digit*digit);
+            n=n/10;
+        }
+        return solve(sum);
+    }
+    static int nextHappy(int n){
+        ++n;
+        while(true){
+            if(solve(n)==true)return n;
+            n++;
+        }
+    }
+}
