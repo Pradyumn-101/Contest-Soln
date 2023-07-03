@@ -1,0 +1,35 @@
+class Solution {
+
+    int maxIndexDiff(int arr[], int n) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for(int i=n-1;i>=0;i--){
+            if(!map.containsKey(arr[i])){
+                map.put(arr[i], i);
+            }
+        }
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        int max = 0;
+        for(int i=n-1;i>=0;i--){
+            if(!list.isEmpty() && list.get(list.size()-1) < arr[i]){
+                list.add(arr[i]);
+            }
+            else if(list.isEmpty()){
+                list.add(arr[i]);
+            }
+            else{
+                int j = 0;
+                while(list.size() > j){
+                    if(list.get(j) >= arr[i]){
+                        // System.out.print(list.get(j));
+                        max = Math.max(max, map.get(list.get(j)) - i);
+                        break;
+                    }
+                    j++;
+                }
+            }
+        }
+        return max;
+    }
+}
