@@ -1,0 +1,12 @@
+class Solution {
+  public:
+    int stockBuyAndSell(int n, vector<int> &prices) {
+        int have = -(prices[0]), nothave=0;
+        for(int i=0;i<n;i++){
+            int tmp=have;
+            have = max(have,nothave-prices[i]);
+            nothave = max(nothave, tmp+prices[i]);
+        }
+        return nothave;
+    }
+};
