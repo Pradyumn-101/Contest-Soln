@@ -1,0 +1,38 @@
+int findK(int a[MAX][MAX],int n,int m,int k)
+    {
+        int strow = 0;
+        int stcol = 0;
+        int enrow = n-1; 
+        int encol = m-1;
+        
+        while(k>0){
+        for(int index = stcol; index<=encol; index++){
+            if(k==1){
+                return a[strow][index];
+            }
+            k--;
+        }
+        strow++;
+        for(int index = strow; index<=enrow; index++){
+            if(k==1){
+                return a[index][encol];
+            }
+            k--;
+        }
+        encol--;
+        for(int index = encol; index>=stcol; index--){
+            if(k==1){
+                return a[enrow][index];
+            }
+            k--;
+        }
+        enrow--;
+        for(int index = enrow; index>=strow; index--){
+            if(k==1){
+                return a[index][stcol];
+            }
+            k--;
+        }
+        stcol++;
+        }
+    }
