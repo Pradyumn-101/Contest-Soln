@@ -1,0 +1,19 @@
+class Solution{
+public:
+    //You need to complete this fucntion
+    #define ll long long
+    long long power(int N,int R)
+    {
+       //Your code here
+       ll n = N,r = R,ans = 1LL;
+       while(r){
+           if(r & 1LL){
+               ans *= n;
+               ans %= mod;
+           }
+           n = (n * n) % mod;
+           r >>= 1LL;
+       }
+       return ans;
+     }   
+    }
