@@ -1,0 +1,50 @@
+ArrayList<Integer> findSpiral(Node root) 
+    {
+        // Your code here
+        ArrayList<Integer> arr= new ArrayList<>();
+        if(root==null){
+            return arr;
+        }
+        Stack<Node> odd= new Stack<>();
+        Stack<Node> even= new Stack<>();
+        int i=1;
+        odd.push(root);
+        
+        while(!odd.isEmpty() || !even.isEmpty()){
+                Node curr;
+                boolean change=false;
+                if(!odd.isEmpty() && (i%2!=0)){
+                    curr=odd.pop();
+                    if(odd.isEmpty()){
+                        change=true;
+                    }
+                    
+                }else{
+                    curr=even.pop();
+                    if(even.isEmpty()){
+                        change=true;
+                    }
+                }
+                arr.add(curr.data);
+                if(i%2!=0){
+                if(curr.right!=null){
+                    even.push(curr.right);
+                }
+                if(curr.left!=null){
+                    even.push(curr.left);
+                }
+                }else{
+                    if(curr.left!=null){
+                        odd.push(curr.left);
+                    }
+                    if(curr.right!=null){
+                        odd.push(curr.right);
+                    }
+                }
+                if(change) i++;
+        }
+       
+        
+        
+        return arr;
+    }
