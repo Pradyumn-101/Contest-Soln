@@ -1,0 +1,21 @@
+class Solution
+{
+    int ans=-1;
+ public int find(Node root,int key,int k)
+    {
+        if(root==null) return 0;
+        if(root.data==key) return 1;
+        int a=find(root.left,key,k);
+        int b=find(root.right,key,k);
+        
+        if(a+b==k) ans=root.data;
+        if(a+b>0) return 1+a+b;
+        return a+b;
+    }
+    public int kthAncestor(Node root, int k, int node)
+    {
+        ans=-1;
+        find(root,node,k);
+        return ans;
+    }
+}
