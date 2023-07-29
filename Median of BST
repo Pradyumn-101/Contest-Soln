@@ -1,0 +1,28 @@
+class Tree {
+    public static float findMedian(Node root) {
+        ArrayList<Float> numbers = new ArrayList<>();
+        inorder(root, numbers);
+
+        return calculateMedian(numbers);
+    }
+
+    public static void inorder(Node root, ArrayList<Float> numbers) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, numbers);
+        numbers.add((float) root.data); // Cast int to float before adding to ArrayList
+        inorder(root.right, numbers);
+    }
+
+    public static float calculateMedian(ArrayList<Float> numbers) {
+        int size = numbers.size();
+        if (size % 2 == 0) {
+            float l = numbers.get(size / 2);
+            float m = numbers.get(size / 2 - 1);
+            return (l + m) / 2;
+        } else {
+            return numbers.get(size / 2);
+        }
+    }
+}
