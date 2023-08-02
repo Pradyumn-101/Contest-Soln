@@ -1,0 +1,39 @@
+class Solution {
+  public:
+    int shortestDistance(int N, int M, vector<vector<int>> A, int X, int Y) {
+        if(A[0][0]==0) return -1;
+             queue<pair<int,int>>q;
+             vector<vector<int>>dist(N,vector<int>(M,INT_MAX));
+             vector<vector<int>>vis(N,vector<int>(M,0));
+             q.push({0,0});
+             vis[0][0]=1;
+             dist[0][0]=0;
+             int delRow[]={-1,0,0,+1};
+             int delCol[]={0,-1,+1,0};
+             while(!q.empty())
+             {
+                 int x=q.front().first;
+                 int y=q.front().second;
+                 q.pop();
+                for(int i=0;i<4;++i)
+                {
+                    int nx=x+delRow[i];
+                    int ny=y+delCol[i];
+            if((nx>=0 && nx<N) && (ny>=0 && ny<M) && !vis[nx][ny] && A[nx][ny]==1)
+            {
+                if(dist[nx][ny]>=dist[x][y]+1)
+                {
+                     dist[nx][ny]=dist[x][y]+1;
+                     vis[nx][ny]=1;
+                     q.push({nx,ny});
+                }
+           }
+        }
+     }
+     if(dist[X][Y] !=INT_MAX)
+     {
+         return dist[X][Y];
+     }
+      return -1;
+    }
+};
