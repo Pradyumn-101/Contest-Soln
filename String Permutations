@@ -1,0 +1,25 @@
+public ArrayList<String> permutation(String S){
+        
+        ArrayList<String> aa= new ArrayList<>();
+        int len=S.length();
+        
+        permutationHelper(S,"",len,aa);
+        
+        Collections.sort(aa);
+        return aa;
+    }
+    
+    public void permutationHelper(String S,String ans,int len,ArrayList<String> aa){
+        
+        if(ans.length()==len){
+             aa.add(ans);
+             return;
+        }
+        
+        for(int i=0;i<S.length();i++){
+            permutationHelper(S.substring(0,i)+S.substring(i+1),ans+S.charAt(i),len,aa);
+        }
+        
+        return ;
+        
+    }
