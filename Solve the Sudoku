@@ -1,0 +1,43 @@
+class Solution
+{
+    //Function to find a solved Sudoku.
+    static boolean isPossible(int[][] grid,int r,int c,int k){
+        for(int i=0;i<9;i++){
+            if(grid[i][c]==k) return false;
+            if(grid[r][i]==k) return false;
+            if(grid[3*(r/3)+i/3][3*(c/3)+i%3]==k) return false;
+        }
+        return true;
+    }
+    
+    static boolean SolveSudoku(int grid[][])
+    {
+        // add your code here
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(grid[i][j]==0){
+                    for(int k = 1;k<=9;k++){
+                        if(isPossible(grid,i,j,k)){
+                            grid[i][j]=k;
+                            if(SolveSudoku(grid)) return true;
+                            else grid[i][j]=0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    //Function to print grids of the Sudoku.
+    static void printGrid (int grid[][])
+    {
+        // add your code here
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+               System.out.print(grid[i][j]+" ");
+            }
+        }
+    }
+}
