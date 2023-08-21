@@ -1,0 +1,21 @@
+class Solution {
+    public static int findMinOperation(int N, int[][] matrix) {
+        // code here
+        int result =0,sum=0;
+        for(int i=0;i<N;i++)
+        {
+            int max =0;
+            int rsum =0;
+            int csum=0;
+            for(int j=0;j<N;j++)
+            {
+                rsum += matrix[i][j];
+                csum += matrix[j][i];
+            }
+            sum += rsum;
+            max = Math.max(rsum,csum);
+            result = Math.max(max,result);
+        }
+        return (int)Math.abs(N*result- sum);
+    }
+}
