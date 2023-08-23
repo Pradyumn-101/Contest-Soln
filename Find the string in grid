@@ -1,0 +1,45 @@
+class Solution
+{
+    public int dx[] = {-1,-1,0,1,1,1,0,-1};
+    public int dy[] = {0,1,1,1,0,-1,-1,-1};
+    
+    public boolean valid(int x,int y,int idx,char[][] grid,String word){
+        if(x<0 || x>= grid.length || y<0 || y>= grid[0].length)return false;
+        return grid[x][y] == word.charAt(idx);
+    }
+    public boolean helper(int x,int y,int dir,int len,int k,char [][]grid,String word){
+        if(len == k){
+            return true;
+        }
+        if(valid(x+dx[dir],y+dy[dir],len+1,grid,word)){
+            return helper(x+dx[dir],y+dy[dir],dir,len+1,k,grid,word);
+        }
+        return false;
+    }
+    public int[][] searchWord(char[][] grid, String word)throws IOException
+    {
+        // Code here
+        int n = grid.length;
+        int m = grid[0].length;
+        int k = word.length()-1;
+        
+        List<int[]> res = new ArrayList<>();
+       
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                for(int dir=0;dir<8;dir++){
+                    if(valid(i,j,0,grid,word) && helper(i,j,dir,0,k,grid,word)){
+                        res.add(new int[]{i,j});
+                        break; //avoiding adding dulpicates
+                    }
+                }
+            }
+        }
+        int[][]ans = new int[res.size()][2];
+        for(int i=0;i<res.size();i++){
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+}
