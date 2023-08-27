@@ -1,0 +1,20 @@
+public static String reverseWord(String str)
+    {
+        // Reverse the string str
+        int n = str.length();
+        char[] characters = str.toCharArray();
+
+        int r = 0;
+        int p = n - 1;
+        while (p > r)
+        {
+        // Swap characters[r] and characters[p] using temporary variable
+        char temp = characters[p];
+        characters[p] = characters[r];
+        characters[r] = temp;
+
+        r++;
+        p--;
+        }
+    return new String(characters);
+    }
