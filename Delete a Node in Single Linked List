@@ -1,0 +1,18 @@
+    Node deleteNode(Node head, int x)
+    {
+         // Your code here
+         Node prev=null;
+         Node curr=head;
+         for(int i=1; i<x; i++){
+             prev=curr;
+             curr=curr.next;
+         }
+       if(prev==null){
+          curr=curr.next;
+          head=curr;
+       }
+       else
+          prev.next=curr.next;
+        
+       return head;
+   }
