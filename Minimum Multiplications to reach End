@@ -1,0 +1,23 @@
+class Solution {
+    int minimumMultiplications(int[] arr, int start, int end) {
+        // Your code here
+        if (start == end) return 0;
+        Queue<Integer> q = new LinkedList<>();
+        Map<Integer, Integer> map = new HashMap<>(); 
+        q.offer(start);
+        map.put(start, 0);
+        while (!q.isEmpty()) {
+            int temp = q.poll();
+            int currentSteps = map.get(temp);
+            for (int num : arr) {
+                int newStart = (temp * num) % 100000;
+                if (newStart == end) return currentSteps+1;
+                if (!map.containsKey(newStart)) {
+                    q.offer(newStart);
+                    map.put(newStart, currentSteps + 1);
+                }
+            }
+        }
+        return -1; 
+    }
+}
