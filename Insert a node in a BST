@@ -1,0 +1,18 @@
+class Solution
+{
+    public:
+        Node* insert(Node* node, int data) {
+        
+            // Your code goes here
+            if(!node) {
+            node = new Node(data);
+            return node;
+        }
+        if(node->data == data) return node;
+        else if(node->data > data) node->left = insert(node->left, data);
+        else node->right = insert(node->right, data);
+        
+        return node;
+    }
+
+};
