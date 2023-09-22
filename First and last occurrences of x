@@ -1,0 +1,11 @@
+vector<int> find(int arr[], int n , int x )
+    {
+        int low = 0;
+        int high = n-1;
+        while(low<=high){
+            if(arr[low]==x && arr[high]==x) return {low,high};
+            if(arr[low]!=x) low++;
+            if(arr[high]!=x) high--;
+        }
+        return {-1,-1};
+    }
