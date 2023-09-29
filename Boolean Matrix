@@ -1,0 +1,24 @@
+class Solution
+{
+    //Function to modify the matrix such that if a matrix cell matrix[i][j]
+    //is 1 then all the cells in its ith row and jth column will become 1.
+    void booleanMatrix(int matrix[][]){
+        int r = matrix.length;
+        int c = matrix[0].length;
+        ArrayList<Integer> a = new ArrayList<>();
+        for(int i=0; i<r; i++){
+            for(int j=0; j<c; j++){
+                if(matrix[i][j]==1){
+                    a.add(i);
+                    a.add(j);
+                }
+            }
+        }
+        for(int i=0; i<a.size(); i++){
+            if(i%2==0) Arrays.fill(matrix[a.get(i)],0,c,1);
+            else{
+                for(int j=0; j<r; j++) matrix[j][a.get(i)] = 1;
+            }
+        }    
+    }
+}
