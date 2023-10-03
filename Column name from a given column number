@@ -1,0 +1,19 @@
+class Solution
+{
+    String colName (long n)
+    {
+        // your code here
+        if(n<27){
+            return ""+(char)(64+n);
+        }
+        long rem=n%26;
+        if(rem==0){
+            rem=26;
+            n=n/26-1;
+        }
+        else{
+            n=n/26;
+        }
+        return colName(n)+""+(char)(64+rem);
+    }
+}
