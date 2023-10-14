@@ -1,0 +1,22 @@
+class Solution
+{
+    public static void inorder_trav(Node root, ArrayList<Integer> list,
+    HashMap<Integer,Integer> map){
+        if(root == null) return ;
+        inorder_trav(root.left, list, map);
+        if(map.containsKey(root.data)) list.add(root.data);
+        else map.put(root.data, 1);
+        inorder_trav(root.right, list, map);
+    }
+    //Function to find the nodes that are common in both BST.
+    public static ArrayList<Integer> findCommon(Node root1,Node root2)
+    {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        inorder_trav(root1, list, map);
+        inorder_trav(root2, list, map);
+        
+        return list;
+    }
+}
