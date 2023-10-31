@@ -1,0 +1,25 @@
+class Solution {
+    void pushZerosToEnd(int[] arr, int n) {
+        // code here
+        
+
+        int count=0;
+        for(int i: arr) if(i==0) count++;
+        
+        int placeHolder=0;
+        //int curr=0;
+        for(int curr=0; curr<n;curr++){
+            if(arr[curr]!=0){
+                arr[placeHolder]=arr[curr];
+                placeHolder++;
+                
+            }
+        }
+        int ind=n-1;
+        while(count!=0){
+           arr[ind]=0;
+           count--;
+           ind--;
+        }
+    }
+}
