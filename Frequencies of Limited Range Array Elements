@@ -1,0 +1,35 @@
+class Solution{
+    //Function to count the frequency of all elements from 1 to N in the array.
+    public static void frequencyCount(int arr[], int N, int P)
+    {
+        // code here
+        
+        HashMap<Integer,Integer> hs= new HashMap<>();
+        for(int i=0;i<N;i++){
+            
+            if(arr[i]>N){
+                 hs.put(arr[i],0);
+            }
+           
+           if(hs.containsKey(arr[i])){
+               hs.put(arr[i],hs.get(arr[i])+1);
+           }
+           else{
+               hs.put(arr[i],1);
+           }
+        }
+        
+        int k=0;
+        for(int j=1;j<=N;j++){
+            
+            if(hs.containsKey(j)){
+                arr[k]=hs.get(j);
+                k++;
+            }
+            else{
+               arr[k]=0;
+               k++;
+            }
+        }
+    }
+}
