@@ -1,0 +1,23 @@
+class Solution {
+    int minDist(int a[], int n, int x, int y) {
+        // code here
+        int dist=n+1;
+        int p=-1;
+        int q=-1;
+        for(int i=0;i<n;i++){
+            if(a[i]==x){
+                p=i;
+            }
+            if(a[i]==y){
+                q=i;
+            }
+            if(Math.abs(p-q)<dist && p!=-1 && q!=-1){
+                dist=Math.abs(p-q);
+            }
+        }
+        if(p==-1 || q==-1){
+            return -1;
+        }
+        return dist;
+    }
+}
