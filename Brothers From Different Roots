@@ -1,0 +1,40 @@
+class Solution {
+    static int count = 0;
+
+    public static int countPairs(Node root1, Node root2, int x) {
+        count = 0;
+        inOrder(root1, root2, x);
+        return count;
+    }
+
+    public static void inOrder(Node root1, Node root2, int x) {
+        if (root1 == null) return;
+
+        
+        inOrder(root1.left, root2, x);
+        
+        int num = x - root1.data;
+
+        if(num >= 0){
+            searchInBST(root2, num);
+        }
+
+        inOrder(root1.right, root2, x);
+    }
+
+    public static void  searchInBST(Node root, int x) {
+        if (root == null) {
+            return;
+        }
+
+        if (root.data == x) {
+            count++;
+        }
+
+        if (x < root.data) {
+             searchInBST(root.left, x);
+        } else {
+             searchInBST(root.right, x);
+        }
+    }
+}
