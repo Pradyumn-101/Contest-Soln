@@ -1,0 +1,14 @@
+class Solution {
+  public:
+    int countX(int L, int R, int X) {
+        char c='0'+X;
+        int count=0;
+        for(int i=L+1;i<R;i++){
+            string ch=to_string(i);
+            for(auto x:ch)
+               if(x==c) count++;
+          }
+        return count;
+    }
+
+};
