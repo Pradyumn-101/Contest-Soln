@@ -1,0 +1,18 @@
+public:
+    int buyMaximumProducts(int n, int k, int price[]){
+        int count =0;
+        vector<pair<int,int>> stocks;
+        for(int i =0;i< n;i++){
+            stocks.push_back({price[i],i + 1});
+        }
+        //sort on the basis of price 
+        sort(stocks.begin(),stocks.end());
+        for(int i =0;i< n;i++){
+            while(k >= stocks[i].first and stocks[i].second > 0){
+                count++;
+                k-=stocks[i].first;
+                stocks[i].second--;
+            }
+        }
+        return count;
+    }
