@@ -1,0 +1,52 @@
+public:
+    // Function to get the cofactor of a matrix.
+    static void getCofactorMatrix(const std::vector<std::vector<int>> &matrix, std::vector<std::vector<int>> &temp, int rowToRemove, int colToRemove, int n)
+    {
+        int i = 0, j = 0;
+
+        for (int row = 0; row < n; row++)
+        {
+            for (int col = 0; col < n; col++)
+            {
+                // Exclude the specified row and column from the matrix.
+                if (row != rowToRemove && col != colToRemove)
+                {
+                    temp[i][j++] = matrix[row][col];
+                    // Move to the next row if the current row is complete.
+                    if (j == n - 1)
+                    {
+                        j = 0;
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+    // Function to calculate the determinant of a matrix.
+    static int determinantOfMatrix(const std::vector<std::vector<int>> &matrix, int n)
+    {
+        // Base case: if the matrix is 1x1, return the only element as the determinant.
+        if (n == 1)
+            return matrix[0][0];
+
+        int determinant = 0;
+        int sign = 1;
+
+        // Create a temporary matrix to store the cofactor.
+        std::vector<std::vector<int>> temp(n, std::vector<int>(n, 0));
+
+        for (int col = 0; col < n; col++)
+        {
+            // Get the cofactor matrix by excluding the first row and the current column.
+            getCofactorMatrix(matrix, temp, 0, col, n);
+
+            // Calculate the determinant recursively for the cofactor matrix.
+            determinant += sign * matrix[0][col] * determinantOfMatrix(temp, n - 1);
+
+            // Change the sign for the next iteration.
+            sign = -sign;
+        }
+
+        return determinant;
+    }
