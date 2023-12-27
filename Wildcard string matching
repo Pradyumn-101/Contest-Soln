@@ -1,0 +1,19 @@
+ bool func(int i,int j,string& wild,string& pattern,vector<vector<int>>& dp){
+        if(i==-1 && j==-1) return true;
+        if(i==-1 || j==-1) return false;
+        
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(wild[i]==pattern[j] || wild[i]=='?') 
+        return dp[i][j]=func(i-1,j-1,wild,pattern,dp);
+        
+        if(wild[i]=='*')
+        return dp[i][j]=(func(i-1,j,wild,pattern,dp)||func(i,j-1,wild,pattern,dp)||func(i-1,j-1,wild,pattern,dp));
+        return dp[i][j]=false;
+    }
+    bool match(string wild, string pattern)
+    {
+        // code here
+        int n=wild.size(),m=pattern.size();
+        vector<vector<int>> dp(n,vector<int>(m,-1));
+        return func(n-1,m-1,wild,pattern,dp);
+    }
