@@ -1,0 +1,24 @@
+  vector<string> winner(string arr[],int n)
+    {
+        map<string,int> mp;
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+         
+        int maxm=INT_MIN;
+        for(auto it:mp){
+            maxm=max(maxm,it.second);
+        }
+        
+         vector<string> res;
+         for(auto it:mp){
+              if(it.second==maxm){
+                  string num=to_string(it.second); //converting num to string
+                    res.push_back(it.first);
+                     res.push_back(num);
+                     break;
+              }
+        }
+       
+        return res;
+    }
