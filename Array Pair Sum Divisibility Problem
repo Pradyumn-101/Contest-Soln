@@ -1,0 +1,29 @@
+class Solution {
+    public boolean canPair(int[] nums, int k) {
+        if(nums.length%2==1) return false;
+        
+        
+        int n = nums.length;
+        boolean[] visited = new boolean[n];
+    
+        int cnt = 0;
+        for(int i = 0; i<n-1; i++){
+            int flag = 0;
+            boolean Enter = false;
+            for(int j = i+1; j<n; j++){
+                if(visited[i]) break;
+                if(visited[j]) continue;
+                
+                Enter = true;
+                if((nums[i]+nums[j])%k==0){
+                    visited[i]=true;
+                    visited[j]=true;
+                    cnt+=2;
+                    flag =1;
+                }
+            }
+            if(Enter && !visited[i] && flag==0) return false;
+        }
+        return (cnt==n) ? true: false;
+    }
+}
