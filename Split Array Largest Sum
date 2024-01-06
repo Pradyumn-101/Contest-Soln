@@ -1,0 +1,58 @@
+class Solution 
+{
+    //Function to find minimum number of pages.
+    public static boolean isvalid(int[] A,int N,int M,int mid)
+    {
+        int st=1;
+        int sum=0;
+        for(int i=0;i<N;i++)
+        {
+            sum+=A[i];
+            if(sum>mid)
+            {
+                st++;
+                sum=A[i];
+            }
+            if(M<st)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static int splitArray(int[]A,int N,int M)
+    {
+        //Your code here
+        if(N<M)
+        {
+            return -1;
+        }
+        int max=Integer.MIN_VALUE;
+        int sum=0;
+        for(int i=0;i<N;i++)
+        {
+            max=Math.max(max,A[i]);
+            sum+=A[i];
+        }
+        if(N==1){
+            return sum;
+        }
+        int start=max;
+        int end=sum;
+        int res=-1;
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            if(isvalid(A,N,M,mid)==true)
+            {
+                res=mid;
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+        }
+        return res;
+    }
+
+};
