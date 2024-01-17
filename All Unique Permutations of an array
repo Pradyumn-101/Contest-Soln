@@ -1,0 +1,46 @@
+static ArrayList<ArrayList<Integer>> uniquePerms(ArrayList<Integer> arr , int n) {
+        HashSet<ArrayList<Integer>> set = new HashSet<>();
+        int[] vis = new int[n];
+        ArrayList<Integer> ds = new ArrayList<>();
+        
+        Recursion(arr, ds, set, vis);
+        
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        for(ArrayList<Integer> ele : set)
+            ans.add(ele);
+            
+        ans.sort((a, b) -> 
+        {
+            for(int i = 0; i < a.size(); i++)
+            {
+                int cmp = a.get(i).compareTo(b.get(i));
+                if(cmp != 0)
+                    return cmp;
+            }
+            
+            return 0;
+        });
+        
+        return ans;
+    }
+    
+    private static void Recursion(ArrayList<Integer> arr, ArrayList<Integer> ds, HashSet<ArrayList<Integer>> set, int[] vis)
+    {
+        if(ds.size() == arr.size())
+        {
+            set.add(new ArrayList(ds));
+            return;
+        }
+        
+        for(int i = 0; i < arr.size(); i++)
+        {
+            if(vis[i] == 0)
+            {
+                vis[i] = 1;
+                ds.add(arr.get(i));
+                Recursion(arr, ds, set, vis);
+                vis[i] = 0;
+                ds.remove(ds.size() - 1);
+            }
+        }
+    }
