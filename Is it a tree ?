@@ -1,0 +1,42 @@
+ public:
+      void dfs(int root, unordered_map<int, bool>& vis,unordered_map<int ,vector<int>>& mpp){
+          vis[root]=1;
+          for(auto it: mpp[root]){
+              if(!vis[it])dfs(it,vis,mpp);
+          }
+      }
+    int isTree(int n, int m, vector<vector<int>> &adj) {
+        if(m!=n-1)return false;
+        unordered_map<int, vector<int>> mpp;
+        for(int i=0;i<adj.size();i++){
+            int u=adj[i][0];
+            int v=adj[i][1];
+            mpp[u].push_back(v);
+            mpp[v].push_back(u);
+        }
+        int index=0;
+        //check node
+        if(n==1)return 1;
+        while(index<n){
+            if(mpp.find(index)!=mpp.end())index++;
+            else{
+             return 0;
+            }
+        }
+        //loop check
+        for(int i=0;i<n;i++){
+            unordered_map<int, bool> vis;
+            vis[i]=1;
+            for(auto it: mpp[i]){
+                if(vis[it])return 0;
+                vis[it]=false;
+            }
+        }
+        //not discrete
+        unordered_map<int, bool>vis;
+        dfs(0,vis,mpp);
+        for(int i=0;i<n;i++){
+            if(vis[i]==0)return 0;
+        }
+        return 1;
+    }
