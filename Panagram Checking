@@ -1,0 +1,16 @@
+class Solution
+{
+    //Function to check if a string is Pangram or not.
+    public static boolean checkPangram  (String s) {
+        // your code here
+        for(int i=0; i<26; i++){
+            char upper = (char)(65+i);
+            char lower = (char)(97+i);
+            if(s.indexOf(upper)==-1 && s.indexOf(lower)==-1)
+            return false;
+        }
+        return true;
+        
+    }
+}
+
