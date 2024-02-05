@@ -1,0 +1,45 @@
+Node *sortedInsert(Node* head, int data)
+    {
+        Node* temp=head->next;
+        Node* prev=head;
+        Node* n = new Node(data);
+       //Your code here
+       if(head==NULL){
+           n->next=n;
+           return n;
+       } 
+       int c=1;
+       if(head->next==head){
+           n->next=head;
+            head->next=n;
+           if(head->data>data){
+               head=n;
+           }
+          return head;
+       } 
+       
+       while(temp!=head){
+           prev=temp;
+           temp=temp->next;
+           c++;
+       }
+       //cout<<c;
+       //cout<<temp->data<<" "<<prev->data;
+       while(temp->data<data &&c>0){
+           prev=temp;
+           temp=temp->next;
+           c--;
+       }
+       
+       if(temp==head &&temp->data>data){
+           prev->next=n;
+           n->next=temp;
+           head=n;
+       }
+       else{
+           prev->next=n;
+           n->next=temp;
+       }
+      return head;
+       
+    }
