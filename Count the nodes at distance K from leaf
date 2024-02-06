@@ -1,0 +1,44 @@
+private:
+    void fillParent(unordered_map<Node *,Node *> &parent,Node * root,vector<Node*> &leaf){
+        queue<Node * > q;
+        q.push(root);
+        while(!q.empty()){
+            Node * node = q.front();
+            q.pop();
+            
+            if(node->left){
+                parent[node->left] = node;
+                q.push(node->left);
+            }
+            if(node->right){
+                parent[node->right] = node;
+                q.push(node->right);
+            }
+            if(!node->left && ! node->right) leaf.push_back(node);
+        }
+    }
+    public:
+    int printKDistantfromLeaf(Node* root, int k)
+    {
+        unordered_map<Node *,Node *> parent;
+        vector<Node*> leaf;
+        fillParent(parent,root,leaf);
+        
+        set<Node *> st;
+        for(int i=0; i<leaf.size(); i++){
+            Node * currNode = leaf[i];
+            int cnt = k;
+            while(cnt){
+                if(parent.count(currNode))
+                    currNode = parent[currNode];
+                else 
+                    break;
+                
+                cnt--;
+            }
+            if(cnt == 0)
+                st.insert(currNode);
+        }
+    
+        return st.size();
+    }
