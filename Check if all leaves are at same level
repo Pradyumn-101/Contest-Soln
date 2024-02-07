@@ -1,0 +1,21 @@
+ bool ans = true;
+    int height = -1;
+    
+    void traverse(Node *root, int tempHeight)
+    {
+        if(!root) return;
+        if(!root->right && !root->left){
+            if(height == -1) height = tempHeight;
+            else if(height != tempHeight) ans = false;
+        }
+        traverse(root->left, tempHeight + 1);
+        traverse(root->right, tempHeight + 1);
+    }
+    
+    /*You are required to complete this method*/
+    bool check(Node *root)
+    {
+        //Your code here
+        traverse(root, 0);
+        return ans;
+    }
