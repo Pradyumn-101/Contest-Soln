@@ -1,0 +1,16 @@
+const int Mod = 1000000007;
+    long long sequence(int n){
+        // code here
+        long long num = 1, ans = 0;
+        
+        for(long long i=1; i<=n; i++) {
+            long long product = 1;
+            for(long long j=1; j<=i; j++) {
+                product = (product % Mod * num) % Mod; 
+                num++;
+            }
+            ans = (ans % Mod + product % Mod) % Mod;
+        }
+        
+        return ans;
+    }
