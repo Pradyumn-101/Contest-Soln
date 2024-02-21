@@ -1,0 +1,14 @@
+public:
+    int func(int i, int j, int &sn, int &tn, string &s, string &t, vector<vector<int>> &dp){
+        if(j == tn) return 1;
+        if(i == sn or sn - i < tn - j) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        long ans = func(i+1, j, sn, tn, s, t, dp) % 1000000007;
+        if(s[i] == t[j]) ans = (ans % 1000000007 + func(i+1, j+1, sn, tn, s, t, dp) % 1000000007) % 1000000007;
+        return dp[i][j] = ans;
+    }
+    int subsequenceCount(string s, string t){
+        int sn = s.size(), tn = t.size();
+        vector<vector<int>> dp(sn, vector<int>(tn, -1));
+        return func(0, 0, sn, tn, s, t, dp);
+    }
