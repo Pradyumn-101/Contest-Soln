@@ -1,0 +1,25 @@
+public:
+    int countPairs(Node* head1, Node* head2, int x) {
+        int count = 0;
+        unordered_map<int, bool> visited;
+
+        // Store the head pointer of the first linked list
+        Node* temp = head1;
+
+        // Traverse the first linked list and store the values in the map
+        while (temp != nullptr) {
+            visited[temp->data] = true;
+            temp = temp->next;
+        }
+
+        // Traverse the second linked list
+        while (head2 != nullptr) {
+            // Check if the complement of the current value exists in the map
+            if (visited.find(x - head2->data) != visited.end()) {
+                count++;
+            }
+            head2 = head2->next;
+        }
+
+        return count;
+    }
