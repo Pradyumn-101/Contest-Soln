@@ -1,0 +1,20 @@
+ long long mod = 1e9+7;
+    vector<int> Series(int n) {
+        // Code here
+        vector<int>store;
+        long long first = 0;
+        long long second = 1;
+        
+        store.push_back(first);
+        store.push_back(second);
+        int i = 2;
+        
+        while(i <= n){
+            long long third = (first%mod + second%mod)%mod;
+            store.push_back(third);
+            first = second;
+            second = third;
+            i++;
+        }
+        return store;
+    }
