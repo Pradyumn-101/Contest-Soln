@@ -1,0 +1,32 @@
+bool validate(string s)
+    {
+        int os=0,zs=0;
+        for(auto it : s)
+        {
+            if(it=='1')
+            os++;
+            else
+            zs++;
+            if(os<zs)
+            return false;
+        }
+        return true;
+    }
+    string toString(int i)
+    {
+        string res = "";
+        while(i)
+        {
+            res = string(1,(i%2)+'0') + res;
+            i/=2;
+        }
+        return res;
+    }
+	vector<string> NBitBinary(int n)
+	{
+	    vector<string> res;
+	    for(int i = pow(2,n)-1;i>=pow(2,n-1);i--)
+	    if(validate(toString(i)))
+	    res.push_back(toString(i));
+	    return res;
+	}
