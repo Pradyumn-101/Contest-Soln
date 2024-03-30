@@ -1,0 +1,21 @@
+int minValue(Node* root) {
+        // Code here
+        
+        if(root->left== NULL && root->right== NULL)
+        {
+            return root->data;
+        }
+        
+        int left=INT_MAX;
+        int right= INT_MAX;
+        if(root->left)
+        {
+            left= minValue(root->left);
+        }
+        if(root->right)
+        {
+            right= minValue(root->right);
+        }
+        
+        return min(left, min(right,root->data));
+    }
