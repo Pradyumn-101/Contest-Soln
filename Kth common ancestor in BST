@@ -1,0 +1,17 @@
+ int kthCommonAncestor(Node *root, int k,int x, int y) {
+        Node *curr = root;
+        vector<Node*>v;
+        while(curr){
+            v.push_back(curr);
+            if(curr -> data < x && curr -> data < y)
+                curr = curr -> right;
+            else if(curr -> data > x && curr -> data > y)
+                curr = curr -> left;
+            else
+                break;    
+        }
+        int n = v.size();
+        if(n < k)
+            return -1;
+        return v[n - 1 - (k - 1)]->data;
+    }
