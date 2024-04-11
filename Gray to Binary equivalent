@@ -1,0 +1,10 @@
+int grayToBinary(int n)
+    {
+        
+        // Your code here
+    int binary = n;
+    while (n >>= 1)
+        binary ^= n;
+    return binary;
+        
+    }
