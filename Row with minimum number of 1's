@@ -1,0 +1,9 @@
+public:
+    int minRow(int n, int m, vector<vector<int>> a) {
+        int mini = INT_MAX, ans = -1;
+        for(int i = 0; i < n; i++){
+            int acc = accumulate(a[i].begin(), a[i].end(), 0);
+            if(acc < mini) mini = acc, ans = i;
+        }
+        return ans+1;
+    }
