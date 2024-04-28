@@ -1,0 +1,21 @@
+Node* deleteMid(Node* head)
+    {
+        // Your Code Here
+        struct Node* slow=head;
+        struct Node* fast=head;
+        struct Node* curr=slow;
+        
+
+//moving slow and fast pointers forward by 1 time...
+        slow=slow->next;
+        fast=fast->next->next;
+        while(fast!=NULL && fast->next!=NULL)
+        {
+            curr=curr->next;
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        curr->next=curr->next->next;  //removing the link to middle node
+        delete slow;
+        return head;
+    }
