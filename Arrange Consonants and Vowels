@@ -1,0 +1,53 @@
+private:
+    bool isVowel(char ch){
+        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+            return true;
+        else 
+            return false;
+    }
+    public:
+    struct Node* arrangeCV(Node *head)
+    {
+       if(!head) return head;
+       Node * p1 = new Node(-1);
+       Node * p2 = p1;
+       p1->next = head;
+       
+       Node * a1 = head;
+       Node * a2 = head;
+       
+       while(a1 && isVowel(a1->data)){
+           p1 = a1;
+           a1 = a1->next;
+           p2 = a2;
+           a2 = a2->next;
+       }
+       
+       while(a1 && !isVowel(a1->data)){
+           p1 = a1;
+           a1 = a1->next;
+       }
+       if(a1 == NULL) return head;
+       
+       while(a2 && isVowel(a2->data)){
+           p2 = a2;
+           a2 = a2->next;
+       }
+       if(a2 == NULL) return head;
+       
+       if(!isVowel(head->data)) head=a1;
+       
+       while(a1 && a2){
+           p1->next = p1->next->next;
+           p2->next = a1;
+           a1->next = a2;
+           
+           p2=p2->next;
+           a1=p1->next;
+           while(a1 && !isVowel(a1->data)){
+               p1 = a1;
+               a1 = a1->next;
+           }
+       }
+       return head;
+    }
