@@ -1,0 +1,22 @@
+ void fun(Node* root,map<int,int> &um,int i){
+        if(root==NULL)
+            return;
+        fun(root->left,um,i-1);
+        fun(root->right,um,i+1);
+        um[i]+=(root->data);
+        return;
+        
+    }
+    
+    
+    vector<int> verticalSum(Node *root) {
+        map<int,int> um;
+        vector<int> ans;
+        fun(root,um,0);
+        
+        for(auto z:um){
+            ans.push_back(z.second);
+        }
+        return(ans);
+        
+    }
