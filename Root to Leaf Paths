@@ -1,0 +1,27 @@
+ vector<vector<int>> Paths(Node* root) {
+        vector<vector<int>> ans;
+        vector<int> tmp;
+        FindAll(root, ans, tmp);
+        return ans;
+    }
+    
+    void FindAll(Node *root, vector<vector<int>> &ans, vector<int> &tmp){
+        // code here
+        if (!root) return;
+        
+        tmp.push_back(root->data);
+        
+        if (!root->left && !root->right){
+            ans.push_back(tmp);
+        }
+        else {
+            if (root->left){
+                FindAll(root->left, ans, tmp);
+                tmp.pop_back();
+            }
+            if (root->right){
+                FindAll(root->right, ans, tmp);
+                tmp.pop_back();
+            }
+        }
+    }
