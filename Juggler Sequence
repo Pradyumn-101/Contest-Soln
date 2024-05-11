@@ -1,0 +1,9 @@
+vector<int> jugglerSequence(int n) {
+        // code here
+        vector<int> result; result.push_back(n);
+        while(n!=1){
+            if(n%2==0) n=(int)sqrt(n);
+            else n=(int)(n*sqrt(n));
+            result.push_back(n);
+        }return result;
+    }
