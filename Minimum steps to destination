@@ -1,0 +1,11 @@
+ public:
+  int solve(int d,int sdx,int edx){
+      
+      if(sdx-d>=0 && (sdx-d)%2==0)
+      return edx;
+      edx++;
+      return solve(d,sdx+edx,edx);
+  }
+    int minSteps(int d) {
+        return solve(d,0,0);
+    }
