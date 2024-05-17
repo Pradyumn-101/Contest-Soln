@@ -1,0 +1,21 @@
+int findPeakElement(vector<int>& a) 
+    {
+        //ternary search
+        int l =0;
+        int r =a.size() -1;
+        while(r>= l){
+            int mid1 = l + (r - l)/3;
+            int mid2 = r - (r - l)/3;
+            
+            if(a[mid1] == a[mid2]){
+                return a[mid1];
+            }
+            
+            else if(a[mid1] < a[mid2]){
+                l = mid1 +1;
+            }
+            else{
+                r = mid2 -1;
+            }
+        }
+    }
