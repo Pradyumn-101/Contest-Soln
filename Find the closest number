@@ -1,0 +1,16 @@
+ int findClosest( int n, int k,int a[]) 
+    { 
+        // Complete the function
+        int y=INT_MAX,ans=0;
+        for(int i=0;i<n;i++)
+        {   
+            int x=abs(a[i]-k);
+            if(x<=y)
+            {
+               y=x;
+               ans=a[i];  
+            }
+            
+        }
+        return ans;
+    } 
