@@ -1,0 +1,42 @@
+public:
+    
+    const long long mod = 1e9+7;
+    vector<vector<long long>> multiply(const vector<vector<long long>> &A, const vector<vector<long long>> &B){
+        int size = A.size();
+        vector<vector<long long >> C(size, vector<long long>(size,0));
+        for(int i=0;i<size;i++){
+            for(int j=0;j<size; j++){
+                for(int k=0;k<size;k++){
+                    C[i][j] = (C[i][j]+A[i][k]*B[k][j])%mod;
+                }
+            }
+        }
+        return C;
+    }
+    vector<vector< long long>>power(vector<vector<long long>> A, int exp) {
+        int size = A.size();
+        vector<vector<long long>>result(size,vector<long long>(size,0));
+        for(int i=0;i<size;i++)result[i][i]=1;
+        while(exp>0){
+            if(exp%2)result = multiply(result,A);
+            A = multiply(A,A);
+            exp/=2;
+        }
+        return result;
+    }
+
+    int padovanSequence(int n)
+    {
+        if(n<=2)return 1;
+        else if(n==3 || n==4)return 2;
+        else if(n==5)return 3;
+        
+        //Transformation Matrix
+        vector<vector<long long>> Q = {
+            {0, 1, 0},
+            {0, 0, 1},
+            {1, 1, 0}
+        };
+        vector<vector<long long>> Qn = power(Q, n+1);
+        return Qn[2][1];
+    }
