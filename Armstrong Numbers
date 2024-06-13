@@ -1,0 +1,10 @@
+ string armstrongNumber(int n){
+        int sum=0;
+        int c=n;
+        while (c>0){
+            sum+=pow(c%10,3);
+            c/=10;
+        }
+        if(sum==n) return "Yes";
+        else return "No";
+    }
