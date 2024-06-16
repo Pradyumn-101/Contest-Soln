@@ -1,0 +1,44 @@
+private:
+    vector<int>sieve_of_eratosthenes(int n)
+{
+    vector<bool>is_p(n+1,true);
+    is_p[0] = is_p[1]= false;
+    for (int p = 2; p * p <= n; p++) {
+        if (is_p[p]) {
+            for (int i = p * p; i <= n; i += p) {
+                is_p[i] = false;
+            }
+        }
+    }
+    vector<int>ans;
+    for (int i = 2; i <is_p.size(); i++) {
+        if (is_p[i]) {
+            ans.push_back(i);
+        }
+    }
+    return ans;
+    
+}
+ 
+  public:
+    vector<int> getPrimes(int n) {
+        vector<int>ans=sieve_of_eratosthenes(n);
+        int s=0;
+        int e=ans.size()-1;
+        while(s<=e)
+        {
+            if(ans[s]+ans[e]==n)
+            {
+                return {ans[s],ans[e]};
+            }
+            else if(ans[s]+ans[e]>n)
+            {
+                e--;
+            }
+            else
+            {
+                s++;
+            }
+        }
+       return {-1,-1}; 
+    }
