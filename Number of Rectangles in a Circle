@@ -1,0 +1,9 @@
+int rectanglesInCircle(int r) {
+        // code here
+        int sum=0;
+        for(int i=1;i<2*r;i++){
+            float a=2*sqrt(r*r*1LL-(i/2.0)*(i/2.0));
+            sum+=(int)a;
+        }
+        return sum;
+    }
