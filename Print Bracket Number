@@ -1,0 +1,17 @@
+ vector<int> bracketNumbers(string str) {
+        vector<int> ans;
+        stack<int> st;
+        int val=0;
+    
+        for(int i=0;i<str.length();i++){
+             if(str[i]=='('){
+                 val++;
+                  st.push(val);
+                  ans.push_back(val);
+             }
+             else if(str[i]==')'){
+                 ans.push_back(st.top());
+                 st.pop();
+             }
+             } 
+    return ans;}
