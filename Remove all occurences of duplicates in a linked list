@@ -1,0 +1,39 @@
+Node* removeAllDuplicates(struct Node* head) {
+        // code here
+        //we essentailly dont have to use space
+        //so we have to remove all occurrences
+        //easy ig
+        Node* temp=head;
+        Node* newHead=NULL;
+        Node * prev=NULL;
+        while(temp!=NULL){
+            if(temp->next!=NULL){
+                Node*temp1=head;
+                if(temp->data==temp->next->data){
+                    while(temp->next!=NULL&&temp->data==temp->next->data){
+                        temp=temp->next;
+                    }
+                    if(prev==NULL){
+                        temp=temp->next;
+                        newHead=temp;
+                    }
+                    else{
+                        prev->next=temp->next;
+                        temp=temp->next;
+                    }
+                }
+                else{
+                    if(prev==NULL){
+                        prev=temp;
+                        newHead=temp;
+                    }
+                    else prev=prev->next;
+                    temp=temp->next;
+                }
+            }
+            else{
+                return newHead;
+            }
+        }
+        return newHead;
+    }
