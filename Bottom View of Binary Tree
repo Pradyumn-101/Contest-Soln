@@ -1,0 +1,37 @@
+public:
+    std::vector<int> bottomView(Node* root) {
+        std::vector<std::vector<int>> view(2, std::vector<int>());
+        std::queue<std::pair<Node*, int>> queue;
+        queue.push({root, 0});
+        while (!queue.empty()) {
+            std::pair<Node*, int> tmp = queue.front();
+            queue.pop();
+            Node* node = tmp.first;
+            if (tmp.second < 0) {
+                int index = std::abs(tmp.second) - 1;
+                if (view[0].size() == index) {
+                    view[0].push_back(node->data);
+                } else {
+                    view[0][index] = node->data;
+                }
+            } else {
+                int index = tmp.second;
+                if (view[1].size() == index) {
+                    view[1].push_back(node->data);
+                } else {
+                    view[1][index] = node->data;
+                }
+            }
+            if (node->left != nullptr) {
+                queue.push({node->left, tmp.second - 1});
+            }
+            if (node->right != nullptr) {
+                queue.push({node->right, tmp.second + 1});
+            }
+        }
+        std::reverse(view[0].begin(), view[0].end());
+        for (int v : view[1]) {
+            view[0].push_back(v);
+        }
+        return view[0];
+    }
