@@ -1,0 +1,33 @@
+public:
+    bool canSplit(vector<int>& arr) {
+        
+        int n = arr.size();
+
+       
+        if(n==1) return false;
+        
+        int low =1;
+        int high = n-2;
+        
+        int sum1=0;
+        sum1 += arr[0];
+        int sum2 =0;
+        sum2 += arr[n-1];
+        
+        while(low <= high){
+            if(sum1 > sum2){
+                sum2 += arr[high];
+                high--;
+            }else if(sum1 < sum2){
+                sum1 += arr[low];
+                low++;
+            }else if(sum1 == sum2){
+                sum1 += arr[low];
+                low++;
+            }
+        }     
+        if(sum1 == sum2){
+            return true;
+        }
+        return false;
+    }
