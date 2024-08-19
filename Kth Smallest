@@ -1,0 +1,7 @@
+public:
+    int kthSmallest(vector<int> &arr, int k) {
+        set<int> st(arr.begin(), arr.end());
+        auto it = st.begin();
+        advance(it, k-1);
+        return *it;
+    }
