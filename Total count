@@ -1,0 +1,11 @@
+public:
+    int totalCount(int k, vector<int>& arr) {
+        // code her
+        int sum=0;
+        for(auto i:arr)
+        {
+            sum+=i/k;
+            if(i%k) sum++;
+        }
+        return sum;
+    }
