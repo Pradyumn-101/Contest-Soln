@@ -1,0 +1,18 @@
+int rotateDelete(vector<int> &arr) {
+        // Your code here
+        int n = arr.size();
+        deque<int> dq(arr.begin(), arr.end());
+    
+        for (int k = 1; dq.size() > 1; k++) {
+            // Rotate right by 1
+            dq.push_front(dq.back());
+            dq.pop_back();
+            
+            // Remove kth element from the end
+            int removeIndex = dq.size() - k;
+            if (removeIndex < 0) removeIndex = 0;
+            dq.erase(dq.begin() + removeIndex);
+        }
+        
+        return dq.front();
+    }
