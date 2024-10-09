@@ -1,0 +1,29 @@
+public:
+    Node* constructLinkedMatrix(vector<vector<int>>& mat) {
+        Node* nn = nullptr;
+        Node* curr = nullptr;
+        Node* prev = nullptr;
+        int rows = mat.size(), cols = mat[0].size();
+        for(int i = 0; i < rows; i++){
+            Node* start = nullptr;
+            for(int j = 0; j < cols; j++){
+                Node* nnode = new Node(mat[i][j]);
+                if(j == 0){
+                    if(i == 0){
+                        nn = nnode;
+                    }
+                    start = nnode;
+                }
+                else{
+                    curr -> right = nnode;
+                }
+                curr = nnode;
+                if(prev){
+                    prev -> down = curr;
+                    prev = prev -> right;
+                }
+            }
+            prev = start;
+        }
+        return nn;
+    }
