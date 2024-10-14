@@ -1,0 +1,32 @@
+public:
+    // Function to count the number of subarrays which adds to the given sum.
+    int subArraySum(vector<int>& arr, int tar) {
+        // The approach is to sum the elements, and save it in a map
+        // the key will be the sum, and the data will be number of times this sum appears
+        int n = arr.size();
+        unordered_map<int, int> mp;
+        // cur - sum of the elements
+        int cur = 0;
+        // count - number of subarrays that can be built
+        int count = 0;
+        for(int i=0; i<n; i++)
+        {
+            cur += arr[i];
+            // consider the element that might be equal to the target
+            if(cur == tar)
+            {
+                count++;
+            }
+            // nLeft is the sum required reaching the target
+            // look for it in the map
+            int nLeft = cur - tar;
+            if(mp.find(nLeft) != mp.end())
+            {
+                // increase appearance counter according to the map
+                count += mp[nLeft];
+            }
+            // make sure to add current sum in the map
+            mp[cur]++;
+        }
+        return count;
+    }
