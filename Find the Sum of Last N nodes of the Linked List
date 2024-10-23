@@ -1,0 +1,23 @@
+public:
+    int sumOfLastN_Nodes(struct Node* head, int n) {
+        Node *toBeRemoved = head;
+        
+        Node *ptr = head;
+        
+        int sum = 0;
+        while (ptr) {
+            if (n == 0) {
+                sum -= toBeRemoved->data;
+                toBeRemoved = toBeRemoved->next;
+            }
+            
+            sum += ptr->data;
+            ptr = ptr->next;
+            
+            if (n > 0) {
+                n--;
+            }
+        }
+        
+        return sum;
+    }
