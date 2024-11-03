@@ -1,0 +1,10 @@
+public:
+    bool isLengthEven(struct Node **head) {
+        Node*temp = *head;
+        bool f = true;
+        while(temp){
+            f^=true;
+            temp = temp->next;
+        }
+        return f;
+    }
