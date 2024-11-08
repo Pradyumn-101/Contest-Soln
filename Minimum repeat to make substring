@@ -1,0 +1,19 @@
+int minRepeats(string& s1, string& s2) {
+        // code here
+        int n1=s1.length();
+        int n2=s2.length();
+        int k=(n2/n1 + n1);
+        string s=s1;
+        int count=1;
+        int i=0;
+        while(i<k){
+            if(s.find(s2) !=string::npos){
+                return count;
+            }else{
+                count++;
+                s+=s1;
+            }
+            i++;
+        }
+        return -1;
+    }
