@@ -1,0 +1,19 @@
+vector<int> findUnion(vector<int> &a, vector<int> &b) {
+        // Your code here
+        // return vector with correct order of elements
+        set<int> s;
+        for(int ele : a){
+            s.insert(ele);
+        }
+        
+        for(int ele : b){
+            s.insert(ele);
+        }
+        
+        vector<int> ans;
+        
+        for(int ele : s){
+            ans.push_back(ele);
+        }
+        return ans;
+    }
