@@ -1,0 +1,22 @@
+public:
+    int minIncrements(vector<int> arr) {
+        // Code here
+        sort(arr.begin(),arr.end());
+        int n = arr.size();
+        int ans =0;
+        int i=0,j =1;
+        
+        while(j<n){
+            if(arr[i]==arr[j]){
+                arr[j] = arr[j]+1;
+                ans++;
+            }
+            else if(arr[i]>arr[j]){
+                ans += arr[i]-arr[j]+1;
+                arr[j] = arr[i]+1;
+            }
+            i++;
+            j++;
+        }
+        return ans;
+    }
