@@ -1,0 +1,12 @@
+void pushZerosToEnd(vector<int>& arr) {
+        vector<int>help;
+        int cntZero=0;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]!=0) help.push_back(arr[i]);
+            else cntZero++;
+        }
+        arr.clear();
+        for(auto it:help) arr.push_back(it);
+        for(int i=0;i<cntZero;i++) arr.push_back(0);
+        
+    }
