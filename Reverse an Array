@@ -1,0 +1,8 @@
+public:
+    void reverseArray(vector<int> &arr) {
+        int n = arr.size();
+        int i=0, j = n-1;
+        while(j>i) {
+            swap(arr[i++],arr[j--]);
+        }
+    }
