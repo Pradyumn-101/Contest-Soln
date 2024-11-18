@@ -1,0 +1,17 @@
+void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        deque<int> dq;
+        for(int i=n-1; i>=0; i--){
+            dq.push_front(arr[i]);
+        }
+        while(d--){
+            int val = dq.front();
+            dq.pop_front();
+            dq.push_back(val);
+        }
+        int i=0;
+        while(!dq.empty()){
+            arr[i++] = dq.front();
+            dq.pop_front();
+        }
+    }
