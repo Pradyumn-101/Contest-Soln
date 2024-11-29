@@ -1,0 +1,47 @@
+public String addBinary(String s1, String s2) {
+        // code here
+        StringBuilder ans = new StringBuilder();
+        int i = 0 , j = 0;
+        int n = s1.length();
+        int m = s2.length();
+    //  Removing the leading Zeroes from both the strings  
+        while(i<n && s1.charAt(i)=='0')i++;
+        while(j<m && s2.charAt(j)=='0')j++;
+        
+        //calculating the string which doesnt have leading zeroes
+        s1 = s1.substring(i,s1.length());
+        s2 = s2.substring(j,s2.length());
+         n = s1.length();
+         m = s2.length();
+         //check if the string are null or not like previos s1 = 0000
+         //after remving leading zeros s1 = "" length = 0 
+         //same for s2 
+        if(n==0)return s2;
+        if(m==0)return s1;
+        //instead of reversing the string we start the counter from back 
+         i = n-1;
+         j = m-1;
+        int carry = 0;
+
+        while(i>=0 || j>=0){
+             int sum = 0;
+            if(i>=0){
+                sum+=(s1.charAt(i)-'0');
+                i--;
+            }
+            
+              if(j>=0){
+                sum+=(s2.charAt(j)-'0');
+                j--;
+                       }
+            
+            sum+=carry;
+            carry = sum/2;
+            ans.append(sum%2);
+        }
+        
+        if(carry!=0)ans.append(carry);
+        
+        return ans.reverse().toString();
+        
+    }
