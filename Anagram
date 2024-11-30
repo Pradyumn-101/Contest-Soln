@@ -1,0 +1,13 @@
+public static boolean areAnagrams(String s1, String s2) {
+
+        // Your code here
+        if(s1.length()!=s2.length()) return false;
+        Map<Character,Integer>hp=new HashMap<>();
+        Map<Character,Integer>hs=new HashMap<>();
+        ane(s1,hp);
+        ane(s2,hs);
+        return hp.equals(hs);
+    }
+    public static void ane(String s,Map<Character,Integer>h){
+        for(char c:s.toCharArray()) h.put(c,h.getOrDefault(c,0)+1);
+    }
