@@ -1,0 +1,52 @@
+public:
+    void mergeArrays(vector<int>& a, vector<int>& b) {
+        // code here
+        int n = a.size(), m = b.size();
+        int len = n + m;
+        int gap = (len + 1) / 2;
+        while(gap > 0)
+        {
+            int idx1 = 0;
+            int idx2 = gap;
+            while(idx2 < len)
+            {
+                // option 1: both indexes of array a
+                if(idx2 < n)
+                {
+                    if(a[idx1] > a[idx2])
+                    {
+                        swap(a[idx1], a[idx2]);
+                    }
+                }
+                // option 2: idx1 of array a and idx2 of array b
+                else if(idx1 < n)
+                {
+                    if(a[idx1] > b[idx2-n])
+                    {
+                        swap(a[idx1], b[idx2-n]);
+                    }
+                }
+                // option 3: both indexes of array b
+                else
+                {
+                    if(b[idx1-n] > b[idx2-n])
+                    {
+                        swap(b[idx1-n], b[idx2-n]);
+                    }
+                }
+                // increase indexes
+                idx1++;
+                idx2++;
+            }
+            // decrease gap by half
+            // when gap reaches 1, exit the loop
+            if(gap > 1)
+            {
+                gap = (gap + 1) / 2;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
