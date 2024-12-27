@@ -1,0 +1,13 @@
+int countPairs(int arr[], int target) {
+        // Your code here
+        int c=0;
+        HashMap<Integer,Integer> hs=new HashMap<>();
+        
+        for(int i:arr){
+            
+            if(hs.containsKey(target-i))
+            c+=hs.get(target-i);
+            hs.put(i,hs.getOrDefault(i,0)+1);
+        }
+        return c;
+    }
