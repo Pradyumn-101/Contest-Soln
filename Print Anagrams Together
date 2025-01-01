@@ -1,0 +1,15 @@
+vector<vector<string>> anagrams(vector<string>& arr) {
+        unordered_map<string, vector<string>>mp;
+        for(auto &b: arr){
+            string p=b;
+            sort(p.begin(), p.end());
+            mp[p].push_back(b);
+        }
+        vector<vector<string>>ans;
+        for(auto &b: mp){
+            vector<string>s(b.second.begin(), b.second.end());
+            ans.push_back(s);
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
