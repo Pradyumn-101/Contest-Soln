@@ -1,0 +1,15 @@
+public:
+    long subarrayXor(vector<int> &arr, int k) {
+        // code here
+        long result = 0;
+        long prefix_sum = 0;
+        unordered_map<long, long> mp;
+        mp[0] = 1;
+        for(int& i : arr)
+        {
+            prefix_sum ^= i;
+            result += mp[k ^ prefix_sum];
+            mp[prefix_sum]++;
+        }
+        return result;
+    }
