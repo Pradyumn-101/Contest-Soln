@@ -1,0 +1,25 @@
+public:
+    vector<int> sumClosest(vector<int>& arr, int target) {
+        // code here
+        int n = arr.size();
+        sort(arr.begin(),arr.end());
+        vector<int> ans;
+        
+        int i=0,j=n-1,mini=INT_MAX;
+        
+        bool hasAns = false;
+        
+        while(i<j){
+            int value = abs(target - arr[i] - arr[j]);
+            if(value<mini){
+                mini = value;
+                ans={arr[i],arr[j]};
+                hasAns = true;
+            }
+            
+            if((arr[i]+arr[j])<=target) ++i;
+            else --j;
+        }
+        
+        return hasAns ? ans : vector<int>();
+    }
