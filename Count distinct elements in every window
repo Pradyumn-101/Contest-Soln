@@ -1,0 +1,36 @@
+public:
+    vector<int> countDistinct(vector<int> &arr, int k) {
+        // code here.
+        vector<int> res;//cretate the vector<int>res;
+        unordered_map<int,int> mp;//here we use unorderedmap;
+        int count=0;//count for the sliding window 
+        
+        for(int i=0;i<k;i++)
+        {
+            if(mp[arr[i]]==0)
+            {
+                count++; //for first window count++;
+            }
+            mp[arr[i]]++;
+        }
+        res.push_back(count);
+        for(int i=k;i<arr.size();i++)//now we add new element and remove first  element
+        {
+            if(mp[arr[i-k]]==1)//if mp is already 1 not 2that means we are not visiting same in
+            //element between the window if we the mp is 2 that means we have same element 
+            //in window and we have already counted value;
+            {
+                count--;
+                
+            }
+            mp[arr[i-k]]--;//we remove mp by 1 because we already moved by 1;
+            
+            if(mp[arr[i]]==0)
+            {
+                count++;//it means that we are not visited;
+            }
+            mp[arr[i]]++;//then we increase mp[arr[i]] by 1;
+            res.push_back(count);
+        }
+        return res;
+    }
