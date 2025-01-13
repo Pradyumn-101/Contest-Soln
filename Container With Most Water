@@ -1,0 +1,16 @@
+int maxWater(vector<int> &arr) {
+        int n=arr.size();
+       if(n<=1)return 0;
+       int l=0,r=n-1,maxx=0,sum=0;
+       while(l<r){
+        sum=min(arr[r],arr[l])*(r-l);
+        maxx=max(sum,maxx);
+        if(arr[l]<arr[r]){
+            l++;
+        }
+        else{
+            r--;
+        }
+       }
+       return maxx;
+    }
