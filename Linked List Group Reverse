@@ -1,0 +1,39 @@
+Node *reverseKGroup(Node *head, int k) {
+        int len=0;
+        Node* ptr=head;
+        while(ptr)
+        len++,ptr=ptr->next;
+        int NumOfGroups=len/k;
+        Node* root=NULL;
+        Node* leaf=NULL;
+        while(NumOfGroups--){
+            Node* curr=NULL;
+            int n=k;
+            while(head && n--){
+                Node* nxt=head->next;
+                head->next=curr;
+                curr=head;
+                head=nxt;
+            }
+            if(root==NULL){
+            root=curr;
+                while(curr->next)
+                curr=curr->next;
+                leaf=curr;
+            }
+            else{
+                leaf->next=curr;
+                while(leaf->next)
+                leaf=leaf->next;
+            }
+        }
+        Node* curr=NULL;
+        while(head){
+            Node* nxt=head->next;
+            head->next=curr;
+            curr=head;
+            head=nxt;
+        }
+        leaf->next=curr;
+        return root;
+    }
