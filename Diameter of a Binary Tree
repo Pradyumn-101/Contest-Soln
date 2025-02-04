@@ -1,0 +1,24 @@
+ public:
+    unordered_map<Node*, int> mp; // Memoization for height
+    
+    int height(Node* root) {
+        if (root == NULL) {
+            return 0;
+        }
+        if (mp.find(root) != mp.end()) {
+            return mp[root];
+        }
+        return mp[root] = 1 + max(height(root->left), height(root->right));
+    }
+
+    int diameter(Node* root) {
+        if (root == NULL) {
+            return 0;
+        }
+
+        int option1 = diameter(root->left);
+        int option2 = diameter(root->right);
+        int option3 = height(root->left) + height(root->right) ;  
+
+        return max(option1, max(option2, option3));
+    }
