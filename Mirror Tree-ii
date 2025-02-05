@@ -1,0 +1,9 @@
+public:
+    Node* mirror(Node* node) {
+        if(!node) return node;
+        Node* left = mirror(node->right);
+        Node* right = mirror(node->left);
+        node->left = left;
+        node->right = right;
+        return node;
+    }
