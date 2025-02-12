@@ -1,0 +1,18 @@
+public int kthSmallest(Node root, int k) {
+      List<Integer> list = new ArrayList<>();
+        Paths(root, list); 
+        Collections.sort(list);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == k) {
+                return (i+1); 
+            }
+        }
+        return -1; 
+    }
+
+    private void Paths(Node node, List<Integer> path) {
+        if (node == null) return;  
+        path.add(node.data); 
+        Paths(node.left, path);  
+        Paths(node.right, path); 
+    }
