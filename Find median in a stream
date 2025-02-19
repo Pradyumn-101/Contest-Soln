@@ -1,0 +1,31 @@
+  public:
+    vector<double> getMedian(vector<int> &arr) {
+        int n = arr.size();
+        priority_queue<double>l;
+        priority_queue<double>r;
+        vector<double>ans;
+        for(int i=0;i<n;i++){
+            if(l.size() == r.size()){
+                if(!r.empty() and arr[i] <= -1 * r.top()){
+                    l.push(arr[i]);
+                }
+                else if(!r.empty() and arr[i] > r.top()){
+                    l.push(-1 * r.top());
+                    r.pop();
+                    r.push(-1 * arr[i]);
+                }
+                else{
+                    l.push(arr[i]);
+                }
+                ans.push_back(l.top());
+            }
+            else{
+                l.push(arr[i]);
+                double x = l.top();
+                l.pop();
+                r.push(-1*x);
+                ans.push_back((l.top()-r.top())/2.0);
+            }
+        }
+        return ans;
+    }
