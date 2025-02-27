@@ -1,0 +1,35 @@
+ public:
+    stack<int>st;
+    int minEle;
+    Solution() {
+        // code here
+    }
+
+    void push(int x) {
+        if(!st.size()) {
+            minEle=x;
+            st.push(x);
+        } else if(x<minEle) {
+            st.push(x-minEle);
+            minEle=x;
+        } else st.push(x);
+        
+    }
+
+
+    void pop() {
+        if(!st.size()) return;
+        if(st.top()<minEle) minEle-=st.top();
+        st.pop();
+    }
+
+    int peek() {
+        if(!st.size()) return -1;
+        if(st.top()<minEle) return minEle;
+        return st.top();
+    }
+
+    int getMin() {
+        if(!st.size()) return -1;
+        return minEle;
+    }
