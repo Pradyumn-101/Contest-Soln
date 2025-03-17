@@ -1,0 +1,11 @@
+public:
+    bool isSubsetSum(vector<int>& nums, int sum) {
+        // code here
+        bitset<10001> arr;
+        arr[0] = 1;
+        for(auto i : nums){
+            arr |= (arr<<i);
+        }
+        
+        return arr[sum];
+    }
