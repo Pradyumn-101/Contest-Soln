@@ -1,0 +1,42 @@
+public:
+    bool isHeap(Node* tree) {
+        queue<Node*> pq;
+        pq.push(tree);
+        vector<Node*> temp;
+        temp.push_back(NULL);
+        while(!pq.empty()){
+            int size = pq.size();
+            for(int i=0 ; i < size ; i++){
+                Node* node =pq.front();
+                pq.pop();
+                temp.push_back(node);
+                if(node->left) pq.push(node->left);
+                if(node->right) pq.push(node -> right);
+            }
+        }
+        
+        for(int i=1 ; i < temp.size() ; i++){
+            Node* actualLeft = temp[i] -> left;
+            Node* actualRight = temp[i] -> right;
+            
+            Node* leftChild = NULL;
+            Node* rightChild = NULL;
+            
+            if(2*i < temp.size()){
+                leftChild = temp[2*i];
+            }
+            
+            if(2*i + 1 < temp.size()){
+                rightChild = temp[2*i+1];
+            }
+            
+            if(leftChild != actualLeft || rightChild != actualRight) return false;
+            if(leftChild && leftChild -> data >= temp[i] -> data) return false;
+            if(rightChild && rightChild -> data >= temp[i] -> data) return false;
+            
+            
+        }
+        
+        return true;
+        
+    }
