@@ -1,0 +1,45 @@
+ public:
+    int findSubString(string& str) {
+        
+        unordered_map<char, int>mp;
+        
+        for(auto i : str)
+        {
+            mp[i]++;
+        }
+        
+        int total = mp.size();
+        int n = str.size();
+        int ans = INT_MAX;
+        
+        
+        unordered_map<char, int>temp;
+        
+        int i = 0;
+        int j = 0;
+        
+        while(i < n && j < n)
+        {
+            temp[str[j]]++;
+            
+            while(i <= j && temp.size() == total)
+            {
+                int res = j - i + 1;
+                ans = min(ans, res);
+                
+                temp[str[i]]--;
+                
+                if(temp[str[i]] == 0)
+                {
+                    temp.erase(str[i]);
+                }
+                
+                i++;
+            }
+            
+            j++;
+        }
+        
+        return ans;
+        
+    }
