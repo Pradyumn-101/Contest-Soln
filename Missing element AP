@@ -1,0 +1,12 @@
+ public:
+    int findMissing(vector<int> &arr) {
+        int n=arr.size();
+        int d=INT_MAX;
+        
+        for(int i=1;i<n;i++) d=min(d,arr[i]-arr[i-1]);
+        for(int i=1;i<n;i++){
+            if(arr[i]-arr[i-1]!=d) return arr[i]-d;
+        }
+        
+        return arr[n-1]+d;
+    }
