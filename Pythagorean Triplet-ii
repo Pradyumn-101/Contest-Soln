@@ -1,0 +1,22 @@
+bool perfectSquare(int a){
+        int c = sqrt(a);
+        return (c*c == a);
+    }
+    bool pythagoreanTriplet(vector<int>& arr) {
+        int n = arr.size();
+        int maxi = *max_element(arr.begin(), arr.end());
+        vector <bool> mp(maxi + 1, false);
+        for(int i = 0; i < n; i++) mp[arr[i]] = true;
+        
+        for(int i = 0; i < n; i++){
+            for(int j = i+1; j < n; j++){
+                int a = max(arr[i], arr[j]);
+                int b = min(arr[i], arr[j]);
+                
+                if(perfectSquare(a*a + b*b) && sqrt(a*a + b*b) <= maxi && mp[sqrt(a*a + b*b)] ) return true;
+                if(perfectSquare(a*a - b*b) && mp[sqrt(a*a - b*b)]) return true;
+            }
+        }
+        
+        return false;
+    }
