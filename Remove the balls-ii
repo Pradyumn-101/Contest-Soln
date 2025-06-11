@@ -1,0 +1,20 @@
+public:
+    int findLength(vector<int> &color, vector<int> &radius) {
+        stack<pair<int,int>> st;
+        for(int i=0 ; i < color.size() ; i++){
+            if(st.empty()){
+                st.push({color[i],radius[i]});
+            }else {
+                pair<int,int> temp = st.top();
+                pair<int,int> temp1 = make_pair(color[i],radius[i]);
+                if(temp == temp1){
+                    st.pop();
+                }else{
+                    st.push(temp1);
+                }
+            }
+        }
+        
+        return st.size();
+        
+    }
