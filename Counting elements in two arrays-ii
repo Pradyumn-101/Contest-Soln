@@ -1,0 +1,30 @@
+public:
+    vector<int> countLessEq(vector<int>& a, vector<int>& b) {
+        // code here
+        unordered_map<int,int> mp;
+        vector<int> temp = a;
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        int count = 0;
+        int i=0;
+        int j=0;
+        vector<int> ans;
+        while(i<a.size() && j<b.size()){
+            if(b[j]<=a[i]){
+                j++;
+                count++;
+            }
+            else{
+                mp[a[i]] = count;
+                i++;
+            }
+        }
+        while(i<a.size()){
+            mp[a[i]] = count;
+            i++;
+        }
+        for(int i:temp){
+            ans.push_back(mp[i]);
+        }
+        return ans;
+    }
