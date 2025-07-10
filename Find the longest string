@@ -1,0 +1,40 @@
+public:
+    void solve(unordered_set<string>& st, string& curr, string temp) {
+        bool extended = false;
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            string next = temp + ch;
+            if (st.find(next) != st.end()) {
+                solve(st, curr, next);
+                extended = true;
+            }
+        }
+        if (!extended) {
+            if (temp.size() > curr.size()) {
+                curr = temp;
+            }
+        }
+    }
+
+    string longestString(vector<string>& arr) {
+        unordered_set<string> st(arr.begin(), arr.end());
+        vector<bool> present(26, false);
+        
+        for (string& s : arr) {
+            if (s.size() == 1) {
+                present[s[0] - 'a'] = true;
+            }
+        }
+
+        string ans = "";
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            if (present[ch - 'a']) {
+                string temp(1, ch);
+                string curr = temp;
+                solve(st, curr, temp);
+                if (curr.size() > ans.size()) {
+                    ans = curr;
+                }
+            }
+        }
+        return ans;
+    }
