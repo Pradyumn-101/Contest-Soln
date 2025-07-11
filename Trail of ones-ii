@@ -1,0 +1,24 @@
+ public:
+    using ll=long long;
+    ll dp[31];
+    ll rec(ll n){
+        if(n==0) return 1;
+        if(n==1) return 2;
+        if(dp[n]!=-1) return dp[n];
+        return dp[n]=rec(n-1)+rec(n-2);
+    }
+    int countConsec(int n) {
+        // code here
+        // TIME: 7mins
+        // if though in reverse
+        // same as 2^n - number of strig without any consecutive 1
+        // for a len n string 
+        
+        // if it ends with 0 then we will add rec(n-1)
+        // if it ends with 1 then the prev character has to be 0
+        // so we will add rec(n-2);
+        memset(dp,-1,sizeof(dp));
+        ll total=1LL<<n;
+        ll sub=rec(n);
+        return (int)(total-sub);
+    }
