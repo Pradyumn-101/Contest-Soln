@@ -1,0 +1,31 @@
+public:
+    int missingNumber(vector<int> &arr) 
+    {
+        int n = arr.size();
+        int maxi = 0;
+        for(int x : arr)
+            maxi = max(maxi , abs(x));
+        maxi++;
+        for(int i = 0; i < n; i++)
+        {
+            if(arr[i] < 0)
+                continue;
+            int num = arr[i] % maxi;
+            if(num > 0 && num <= n)
+            {
+                int idx = num - 1;
+                if(arr[idx] >= 0)
+                    arr[idx] += maxi;
+                else
+                    arr[idx] -= maxi;
+            }
+        }
+        for(int i = 1; i <= n; i++)
+        {
+            int x = arr[i - 1];
+            int freq = x / maxi;
+            if(freq == 0)
+                return i;
+        }
+        return n + 1;
+    }
