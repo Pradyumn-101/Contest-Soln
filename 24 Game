@@ -1,0 +1,41 @@
+class Solution {
+    double n = 1e-6;
+    public boolean judgePoint24(int[] cards) {
+        List<Double> list = new ArrayList<>();
+        for(int card:cards){
+            list.add((double)card);
+        }
+        return solve(list);
+    }
+    private boolean solve(List<Double> list){
+        if(list.size()==1){
+            return Math.abs(list.get(0)-24.0)<n;
+        }
+        int size = list.size();
+        for(int i=0;i<size;i++){
+            for(int j=0;j<size;j++){
+                if(i==j)continue;
+                List<Double> next = new ArrayList<>();
+                for(int k=0;k<size;k++){
+                    if(k!=i && k!=j){
+                        next.add(list.get(k));
+                    }
+                }
+                double a = list.get(i), b = list.get(j);
+                List<Double> res = new ArrayList<>();
+                res.add(a+b);
+                res.add(a-b);
+                res.add(b-a);
+                res.add(a*b);
+                if(Math.abs(b)>n)res.add(a/b);
+                if(Math.abs(a)>n)res.add(b/a);
+                for(double val:res){
+                    next.add(val);
+                    if(solve(next))return true;
+                    next.remove(next.size()-1);
+                }
+            }
+        }
+        return false;
+    }
+}
