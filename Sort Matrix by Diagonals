@@ -1,0 +1,45 @@
+class Solution {
+    public int[][] sortMatrix(int[][] grid) {
+        int n = grid.length;
+
+        for(int i = 0; i < n; i++){
+            sortdiag(grid, i , 0, true); //descending
+        }
+
+        for(int i = 1; i < n; i++){
+            sortdiag(grid, 0, i, false); //ascending
+        }
+
+        return grid;
+    }
+
+    public void sortdiag(int[][] grid, int row, int col, boolean descending){
+        int n = grid.length;
+        List<Integer> diagonal = new ArrayList<>();
+
+        int i = row;
+        int j = col;
+
+        while(i < n && j < n){
+            diagonal.add(grid[i][j]);
+            i++;j++;
+        }
+
+        if(descending){
+            Collections.sort(diagonal, Collections.reverseOrder());
+        }
+        else{
+            Collections.sort(diagonal);
+        }
+
+        i = row;
+        j = col;
+        int ind = 0;
+
+        while(i < n && j < n){
+            grid[i][j] = diagonal.get(ind++);
+            i++;
+            j++;
+        }
+    }
+}
