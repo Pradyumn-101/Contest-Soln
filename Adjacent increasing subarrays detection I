@@ -1,0 +1,19 @@
+import java.util.*;
+
+class Solution {
+    public static boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+        int n = nums.size();
+        int len = 1, prev = 0;
+
+        for (int i = 1; i < n && Math.max(len / 2, Math.min(len, prev)) < k; i++) {
+            if (nums.get(i) > nums.get(i - 1)) {
+                len++;
+            } else {
+                prev = len;
+                len = 1;
+            }
+        }
+
+        return Math.max(len / 2, Math.min(len, prev)) >= k;
+    }
+}
