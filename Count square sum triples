@@ -1,0 +1,27 @@
+class Solution {
+    public int countTriples(int n) {
+        int res = 0;
+
+        // u is the major generator
+        for (int u = 2; u * u <= n; u++) {
+            for (int v = 1; v < u; v++) {
+
+                // Must be opposite parity and coprime
+                if (((u - v) & 1) == 0 || gcd(u, v) != 1)
+                    continue;
+
+                // primitive triple's hypotenuse
+                int c = u * u + v * v;
+                if (c > n) continue;
+
+                // For hypotenuse c, number of valid scaled triples = n/c
+                res += 2 * (n / c);
+            }
+        }
+        return res;
+    }
+
+    int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
