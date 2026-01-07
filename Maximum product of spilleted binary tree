@@ -1,0 +1,19 @@
+class Solution {
+    long totalSum,max;
+    public long dfs(TreeNode root) {
+        if(root == null) return 0;
+        return root.val + dfs(root.left) + dfs(root.right);
+    }
+    public long postOrder(TreeNode root) {
+        if(root == null) return 0;
+        long sum = root.val + postOrder(root.left) + postOrder(root.right);
+        max = Math.max(max, (totalSum - sum)*sum);
+        return sum;
+    }
+    public int maxProduct(TreeNode root) {
+        totalSum = dfs(root);
+        max=0;
+        postOrder(root);
+        return (int)(max%1000000007);
+    }
+}
