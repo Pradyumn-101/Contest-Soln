@@ -1,0 +1,39 @@
+class Solution {
+    TreeNode ans = null;
+    int maxLevel = -1;
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+        getSubtreeForAllDeepestNodes(root, root, 0);
+        return ans == null ? root : ans;
+    }
+
+    public int getSubtreeForAllDeepestNodes(TreeNode originalRoot, TreeNode root, int currLevel) {
+        if(root == null) {
+            return -1;
+        }
+        int leftNode = getSubtreeForAllDeepestNodes(originalRoot, root.left, currLevel+1);
+        int rightNode = getSubtreeForAllDeepestNodes(originalRoot, root.right, currLevel+1);
+
+        if(maxLevel < currLevel) {
+            ans = root;
+            maxLevel = currLevel;
+        } else if(maxLevel == currLevel) {
+            getCommonAncestor(originalRoot, ans == null ? -1 : ans.val, root.val);
+        }
+        return Math.max(currLevel, Math.max(leftNode, rightNode));
+    }
+
+    public boolean getCommonAncestor(TreeNode root, int a, int b) {
+        if(root == null) {
+            return false;
+        }
+        boolean leftNode = getCommonAncestor(root.left, a, b);
+        boolean rightNode = getCommonAncestor(root.right, a, b);
+        if(leftNode && rightNode) {
+            ans = root;
+        }
+        if(root.val == a || root.val == b || leftNode || rightNode) {
+            return true;
+        }
+        return false;
+    }
+}
