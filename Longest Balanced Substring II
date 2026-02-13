@@ -1,0 +1,96 @@
+class Solution {
+    public int longestBalanced(String s) {
+        char[] c = s.toCharArray();
+        int n = c.length;
+        int res = 0;
+
+        // 1. Check Singletons {a}, {b}, {c}
+        // This logic finds the longest contiguous run of 'a', 'b', or 'c'
+        int cur_a = 0, cur_b = 0, cur_c = 0;
+        int max_a = 0, max_b = 0, max_c = 0;
+        
+        for (char x : c) {
+            if (x == 'a') { cur_a++; cur_b = 0; cur_c = 0; }
+            else if (x == 'b') { cur_b++; cur_a = 0; cur_c = 0; }
+            else { cur_c++; cur_a = 0; cur_b = 0; }
+            
+            max_a = Math.max(max_a, cur_a);
+            max_b = Math.max(max_b, cur_b);
+            max_c = Math.max(max_c, cur_c);
+        }
+        res = Math.max(Math.max(max_a, max_b), max_c);
+        
+        // 2. Check Pairs {a,b}, {a,c}, {b,c}
+        res = Math.max(res, find2(c, 'a', 'b'));
+        res = Math.max(res, find2(c, 'a', 'c'));
+        res = Math.max(res, find2(c, 'b', 'c'));
+        
+        // 3. Check Trio {a,b,c}
+        res = Math.max(res, find3(c));
+        
+        return res;
+    }
+    
+    // Finds longest substring with equal counts of x and y, containing ONLY x and y
+    private int find2(char[] c, char x, char y) {
+        int n = c.length, max_len = 0;
+        
+        // Array to store the first index where a specific difference was seen.
+        // Size 2*n+1 allows indices for differences from -n to +n.
+        int[] first = new int[2 * n + 1];
+        Arrays.fill(first, -2); // -2 indicates "not seen yet"
+        
+        // 'diff' represents (count(x) - count(y)). Offset by n to keep it positive.
+        int diff = n;
+        first[diff] = -1; // Base case: difference 0 at index -1
+        
+        int clear_idx = -1; // The index of the last "forbidden" character
+        
+        for (int i = 0; i < n; i++) {
+            if (c[i] != x && c[i] != y) {
+                // We hit a wall (the 3rd character). Reset tracking.
+                clear_idx = i;
+                diff = n;
+                first[diff] = i; // The "zero diff" state effectively resets here
+            } else {
+                if (c[i] == x) diff++;
+                else diff--;
+                
+                // If we haven't seen this diff OR the last time we saw it was before the wall
+                if (first[diff] == -2 || first[diff] < clear_idx) {
+                    first[diff] = i;
+                } else {
+                    // Same diff means the substring between first[diff] and i is balanced
+                    max_len = Math.max(max_len, i - first[diff]);
+                }
+            }
+        }
+        return max_len;
+    }
+    
+    // Finds longest substring with equal counts of a, b, and c
+    private int find3(char[] c) {
+        // State encoding: (countA - countB) and (countB - countC)
+        // We use a mathematical trick to pack these into a single Long key.
+        // A=+1M+1, B=-1M, C=-1 -> Net change 0 means equal A, B, C
+        long state = 0;
+        
+        Map<Long, Integer> first = new HashMap<>();
+        first.put(0L, -1);
+    
+        int max_len = 0;
+    
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 'a') state += 1_000_001; // Effectively +1 to "A-B" and "A-C" parts
+            else if (c[i] == 'b') state -= 1_000_000;
+            else state -= 1;
+        
+            if (first.containsKey(state)) {
+                max_len = Math.max(max_len, i - first.get(state));
+            } else {
+                first.put(state, i);
+            }
+        }
+        return max_len;
+    }
+}
